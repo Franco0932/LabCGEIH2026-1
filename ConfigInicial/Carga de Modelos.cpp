@@ -1,6 +1,6 @@
 /*
 Ruiz Godoy Franco
-Previo 05
+Previo 06
 317159019
 09-Septiembre-2025
 */
@@ -101,6 +101,8 @@ int main( )
     Shader shader( "Shader/modelLoading.vs", "Shader/modelLoading.frag" );
     
     // Load models
+	Model dog((char*)"Models/RedDog.obj"); //Perro rojo
+	Model sonic((char*)"Models/Sonic.obj"); //Sonic
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
   
@@ -130,7 +132,18 @@ int main( )
         // Draw the loaded model
         glm::mat4 model(1);
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        
+		dog.Draw(shader);
+
+		model = glm::translate(model, glm::vec3(3.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 2.5f, 2.5f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        dog.Draw(shader);
+
+        //Sonic
+        model = glm::translate(model, glm::vec3(0.0f, 0.09f, -0.1f));
+        model = glm::scale(model, glm::vec3(0.008f, 0.008f, 0.008f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        sonic.Draw(shader);
 
         // Swap the buffers
         glfwSwapBuffers( window );

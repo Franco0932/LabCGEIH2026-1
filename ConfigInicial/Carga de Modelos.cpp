@@ -1,8 +1,8 @@
 /*
 Ruiz Godoy Franco
-Previo 06
+Práctica 06
 317159019
-09-Septiembre-2025
+22-Septiembre-2025
 */
 
 // Std. Includes
@@ -61,7 +61,7 @@ int main( )
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE );
     
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, u8"Previo 6 - Franco Ruiz - Carga de modelos y cámara sintetica", nullptr, nullptr );
+    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, u8"Práctica 6 - Franco Ruiz - Carga de modelos y cámara sintetica", nullptr, nullptr );
     
     if ( nullptr == window )
     {
@@ -101,8 +101,11 @@ int main( )
     Shader shader( "Shader/modelLoading.vs", "Shader/modelLoading.frag" );
     
     // Load models
-	Model dog((char*)"Models/RedDog.obj"); //Perro rojo
-	Model sonic((char*)"Models/Sonic.obj"); //Sonic
+	Model guitarra((char*)"Models/GuitarraAcustica/Acoustic_Guitar.obj"); //GuitarraAcustica
+	Model mic((char*)"Models/Mic/Mic.obj"); //Micrófono
+	Model bateria((char*)"Models/Bateria/Bateria.obj"); //Bateria
+	Model ampli((char*)"Models/Ampli/Ampli.obj"); //Amplificador
+	Model escenario((char*)"Models/Escenario/Escenario.obj"); //Escenario
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
   
@@ -131,19 +134,45 @@ int main( )
 
         // Draw the loaded model
         glm::mat4 model(1);
-        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		dog.Draw(shader);
 
-		model = glm::translate(model, glm::vec3(3.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(2.5f, 2.5f, 2.5f));
+		//Guitarra
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-1.0f, 2.5f, 7.0f));
+        model = glm::scale(model, glm::vec3(2.2f, 2.2f, 2.2f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        dog.Draw(shader);
+        guitarra.Draw(shader);
 
-        //Sonic
-        model = glm::translate(model, glm::vec3(0.0f, 0.09f, -0.1f));
-        model = glm::scale(model, glm::vec3(0.008f, 0.008f, 0.008f));
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-3.5f, 2.5f, 6.7f));
+        model = glm::scale(model, glm::vec3(0.06f, 0.06f, 0.06f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        sonic.Draw(shader);
+        mic.Draw(shader);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.0f, 4.0f, 1.7f));
+        model = glm::scale(model, glm::vec3(0.011f, 0.011f, 0.011f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        bateria.Draw(shader);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-7.0f, 2.5f, 5.0f));
+        model = glm::scale(model, glm::vec3(0.12f, 0.12f, 0.12f));
+		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        ampli.Draw(shader);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(7.0f, 2.5f, 5.0f));
+        model = glm::scale(model, glm::vec3(0.12f, 0.12f, 0.12f));
+        model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        ampli.Draw(shader);
+
+        model = glm::mat4(1);
+        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        escenario.Draw(shader);
 
         // Swap the buffers
         glfwSwapBuffers( window );

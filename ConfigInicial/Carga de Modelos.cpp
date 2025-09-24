@@ -156,7 +156,7 @@ int main( )
         bateria.Draw(shader);
 
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-7.0f, 2.5f, 5.0f));
+        model = glm::translate(model, glm::vec3(-7.0f, 2.5f, 6.0f));
         model = glm::scale(model, glm::vec3(0.12f, 0.12f, 0.12f));
 		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));

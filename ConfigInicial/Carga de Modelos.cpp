@@ -2,7 +2,7 @@
 Ruiz Godoy Franco
 Práctica 06
 317159019
-22-Septiembre-2025
+24-Septiembre-2025
 */
 
 // Std. Includes
@@ -142,6 +142,7 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         guitarra.Draw(shader);
 
+		//Micrófono
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(-3.5f, 2.5f, 6.7f));
         model = glm::scale(model, glm::vec3(0.06f, 0.06f, 0.06f));
@@ -149,12 +150,14 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         mic.Draw(shader);
 
+		//Batería
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(1.0f, 4.0f, 1.7f));
         model = glm::scale(model, glm::vec3(0.011f, 0.011f, 0.011f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         bateria.Draw(shader);
 
+		//Amplificador
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(-7.0f, 2.5f, 6.0f));
         model = glm::scale(model, glm::vec3(0.12f, 0.12f, 0.12f));
@@ -162,6 +165,7 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         ampli.Draw(shader);
 
+		//Amplificador 2
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(7.0f, 2.5f, 5.0f));
         model = glm::scale(model, glm::vec3(0.12f, 0.12f, 0.12f));
@@ -169,6 +173,7 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         ampli.Draw(shader);
 
+		//Escenario
         model = glm::mat4(1);
         model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));

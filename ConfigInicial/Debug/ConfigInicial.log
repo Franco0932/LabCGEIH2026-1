@@ -1,9 +1,9 @@
-﻿  Texturizado.cpp
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Texturizado.cpp(219,24): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Texturizado.cpp(319,11): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Texturizado.cpp(320,11): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Texturizado.cpp(324,18): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Texturizado.cpp(325,18): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Texturizado.cpp(327,10): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Texturizado.cpp(328,10): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+﻿  Iluminacion.cpp
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(204,30): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(350,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(351,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(355,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(356,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(358,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(359,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   ConfigInicial.vcxproj -> C:\Users\Franco\Desktop\LabCGEIH2026-1\Debug\ConfigInicial.exe

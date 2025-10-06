@@ -1,8 +1,8 @@
 /*
 Ruiz Godoy Franco
-Previo 07
+Práctica 07
 317159019
-24-Septiembre-2025
+06-Octubre-2025
 */
 
 #include <iostream>
@@ -63,7 +63,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, u8"Franco Ruiz - Previo 7 - Texturizado", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, u8"Franco Ruiz - Práctica 7 - Texturizado", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -107,18 +107,54 @@ int main()
 	GLfloat vertices[] =
 	{
 		// Positions            // Colors              // Texture Coords
-		-0.5f, -0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,0.0f,
-		0.5f, -0.5f, 0.0f,	   1.0f, 1.0f,1.0f,		1.0f,0.0f,
-		0.5f,  0.5f, 0.0f,     1.0f, 1.0f,1.0f,	    1.0f,1.0f,
-		-0.5f,  0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,1.0f,
+
+		//Frente
+		-0.5f, -0.5f,  0.5f,	1.0f, 1.0f, 1.0f,	    0.25f, 0.33f,
+		 0.5f, -0.5f,  0.5f,	1.0f, 1.0f, 1.0f,	    0.00f, 0.33f,
+		 0.5f,  0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		0.00f, 0.66f,
+		-0.5f,  0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		0.25f, 0.66f, 
+
+		//Atras
+		-0.5f, -0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.50f, 0.33f, 
+		 0.5f, -0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.75f, 0.33f, 
+		 0.5f,  0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.75f, 0.66f,
+		-0.5f,  0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.50f, 0.66f, 
+
+		//Derecha
+		 0.5f, -0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		1.00f, 0.33f, 
+		 0.5f, -0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.75f, 0.33f, 
+		 0.5f,  0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.75f, 0.66f,
+		 0.5f,  0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		1.00f, 0.66f,
+
+		 //Izquierda
+		 -0.5f, -0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		0.25f, 0.33f, 
+		 -0.5f, -0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.50f, 0.33f,
+		 -0.5f,  0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.50f, 0.66f,
+		 -0.5f,  0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		0.25f, 0.66f,
+
+		 //Abajo
+		 -0.5f, -0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.25f, 0.00f,
+		  0.5f, -0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.50f, 0.00f,
+		  0.5f, -0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		0.50f, 0.33f,
+		 -0.5f, -0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		0.25f, 0.33f,
+
+		 //Arriba
+		 -0.5f,  0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.25f, 0.66f,
+		  0.5f,  0.5f, -0.5f,	1.0f, 1.0f, 1.0f,		0.50f, 0.66f,
+		  0.5f,  0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		0.50f, 1.00f,
+		 -0.5f,  0.5f,  0.5f,	1.0f, 1.0f, 1.0f,		0.25f, 1.00f,
 
 		
 	};
 
 	GLuint indices[] =
 	{  // Note that we start from 0!
-		0,1,3,
-		1,2,3
+		0, 1, 3, 1, 2, 3,
+		4, 5, 7, 5, 6, 7,
+		8, 9, 11, 9, 10, 11,
+		12, 13, 15, 13, 14, 15,
+		16, 17, 19,	17, 18, 19,
+		20, 21, 23, 21, 22, 23
 	
 	};
 
@@ -158,14 +194,14 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	// Diffuse map
-	//image = stbi_load("images/checker_Tex.png", &textureWidth, &textureHeight, &nrChannels,0);
-	image = stbi_load("images/kirby.jpg", &textureWidth, &textureHeight, &nrChannels, 0);
+	image = stbi_load("images/Cubo.png", &textureWidth, &textureHeight, &nrChannels,0);
+	//image = stbi_load("images/kirby.jpg", &textureWidth, &textureHeight, &nrChannels, 0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	if (image)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
@@ -214,7 +250,7 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		// Draw the light object (using light's vertex attributes)
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
 		// Swap the screen buffers

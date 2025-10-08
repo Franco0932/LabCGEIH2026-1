@@ -2,7 +2,7 @@
 Ruiz Godoy Franco
 Previo 08
 317159019
-06-Octubre-2025
+08-Octubre-2025
 */
 
 // Std. Includes
@@ -46,7 +46,9 @@ bool firstMouse = true;
 
 // Light attributes
 glm::vec3 lightPos(0.5f, 0.5f, 2.5f);
+glm::vec3 lightPos2(4.5f, 0.5f, 2.5f);
 float movelightPos = 0.0f;
+float movelightPos2 = 0.0f;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 float rot = 0.0f;
@@ -109,10 +111,11 @@ int main()
 
     // Load models
     Model red_dog((char*)"Models/RedDog.obj");
+	Model Caballerito((char*)"Models/Caballerito/Caballerito.obj");
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
 
     float vertices[] = {
-      -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
          0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
          0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
          0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -183,6 +186,7 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 
     image = stbi_load("Models/Texture_albedo.jpg", &textureWidth, &textureHeight, &nrChannels, 0);
+    //image = stbi_load("Models/None_2_Base_Color.png", &textureWidth, &textureHeight, &nrChannels, 0);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
     glGenerateMipmap(GL_TEXTURE_2D);
     if (image)
@@ -216,13 +220,26 @@ int main()
         
         lightingShader.Use();
         GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "light.position");
+        GLint lightPosLoc2 = glGetUniformLocation(lightingShader.Program, "light2.position");
         GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
         glUniform3f(lightPosLoc, lightPos.x + movelightPos, lightPos.y + movelightPos, lightPos.z + movelightPos);
+        glUniform3f(lightPosLoc2, lightPos2.x + movelightPos2, lightPos2.y + movelightPos2, lightPos2.z + movelightPos2);
         glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
 
 
         // Set lights properties
-        
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[0].position"), lightPos.x, lightPos.y, lightPos.z);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[0].ambient"), 0.8f, 0.8f, 0.0f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[0].diffuse"), 0.8f, 0.8f, 0.0f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[0].specular"), 1.0f, 1.0f, 1.0f);
+
+        //Luz 2
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[1].position"), lightPos2.x, lightPos2.y, lightPos2.z);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[1].ambient"), 0.0f, 0.4f, 0.8f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[1].diffuse"), 0.0f, 0.4f, 0.8f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "lights[1].specular"), 0.7f, 0.7f, 0.7f);
+
+        glUniform1i(glGetUniformLocation(lightingShader.Program, "numLights"), 2);
 
 
 
@@ -232,8 +249,10 @@ int main()
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
         // Set material properties
-        
-
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 1.0f, 1.0f, 1.0f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 1.0f, 1.0f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 1.0f, 1.0f, 1.0f);
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 0.5f);
 
 
 
@@ -244,9 +263,15 @@ int main()
         model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(VAO);
-       
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-        
+        //glDrawArrays(GL_TRIANGLES, 0, 36);
+		red_dog.Draw(lightingShader);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(7.0f, -1.5f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.6f, 0.6f, 0.6f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		Caballerito.Draw(lightingShader);
 
         glBindVertexArray(0);
 
@@ -261,6 +286,12 @@ int main()
         model = glm::scale(model, glm::vec3(0.3f));
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        //Luz 2
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, lightPos2);
+        model = glm::scale(model, glm::vec3(0.3f));
+        glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
 
@@ -340,6 +371,17 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
         movelightPos -= 0.1f;
     }
 
+    if (keys[GLFW_KEY_I])
+    {
+
+        movelightPos2 += 0.1f;
+    }
+
+    if (keys[GLFW_KEY_K])
+    {
+
+        movelightPos2 -= 0.1f;
+    }
 
 }
 

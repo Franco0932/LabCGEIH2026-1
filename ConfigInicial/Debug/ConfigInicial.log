@@ -1,9 +1,24 @@
-﻿  Iluminacion.cpp
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(220,30): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(476,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(477,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(481,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(482,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(484,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\Iluminacion.cpp(485,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+﻿  fuentesDeLuz.cpp
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(196,24): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(235,20): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(235,20): warning C4244:         with
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(235,20): warning C4244:         [
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(235,20): warning C4244:             T=float
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(235,20): warning C4244:         ]
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(236,20): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(236,20): warning C4244:         with
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(236,20): warning C4244:         [
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(236,20): warning C4244:             T=float
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(236,20): warning C4244:         ]
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(237,20): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(237,20): warning C4244:         with
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(237,20): warning C4244:         [
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(237,20): warning C4244:             T=float
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(237,20): warning C4244:         ]
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(479,11): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(480,11): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(484,18): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(485,18): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(487,10): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Franco\Desktop\LabCGEIH2026-1\ConfigInicial\fuentesDeLuz.cpp(488,10): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   ConfigInicial.vcxproj -> C:\Users\Franco\Desktop\LabCGEIH2026-1\Debug\ConfigInicial.exe

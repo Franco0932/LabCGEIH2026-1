@@ -367,7 +367,7 @@ int main()
         model = glm::scale(model, glm::vec3(0.3f));
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(VAO);
-        sun.Draw(lightingShader);
+        sun.Draw(lampshader);
         //Luz 2
         /*model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos2 + movelightPos2);

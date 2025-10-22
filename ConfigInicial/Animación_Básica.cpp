@@ -109,6 +109,10 @@ glm::vec3 Light1 = glm::vec3(0);
 //Anim
 float rotBall = 0;
 bool AnimBall = false;
+bool translateBall = true;
+float posBall = 0.0f;
+float limSupBall = 1.8f;
+float limInfBall = 0.0f;
 
 
 // Deltatime
@@ -298,11 +302,13 @@ int main()
 		Dog.Draw(lightingShader);
 
 		model = glm::mat4(1);
-		glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
+		glEnable(GL_BLEND);//Activa la funcionalidad para trabajar el canal alfa
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 1);
-		model = glm::rotate(model, glm::radians(rotBall), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.06f, 0.5f, -0.3f));
+		//model = glm::rotate(model, glm::radians(rotBall), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, posBall, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	    Ball.Draw(lightingShader); 
 		glDisable(GL_BLEND);  //Desactiva el canal alfa 
@@ -450,6 +456,22 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 	}
 }
 void Animation() {
+	if (AnimBall) {
+		if (translateBall) {
+			posBall += 0.003f;
+			if (posBall >= limSupBall) {
+				translateBall = false;
+			}
+		}
+		else {
+			posBall -= 0.003f;
+			if (posBall <= limInfBall) {
+				translateBall = true;
+			}
+
+		}
+	}
+	/*
 	if (AnimBall)
 	{
 		rotBall += 0.2f;
@@ -459,6 +481,7 @@ void Animation() {
 	{
 		//rotBall = 0.0f;
 	}
+	*/
 }
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)

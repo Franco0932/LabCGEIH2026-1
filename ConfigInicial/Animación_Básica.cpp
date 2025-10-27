@@ -1,8 +1,8 @@
 /*
 Ruiz Godoy Franco
-Previo 10
+Práctica 10
 317159019
-22-Octubre-2025
+27-Octubre-2025
 */
 
 #include <iostream>
@@ -114,6 +114,24 @@ float posBall = 0.0f;
 float limSupBall = 1.8f;
 float limInfBall = 0.0f;
 
+float orbitAngle = 0.0f;  
+float orbitSpeed = 45.0f;  
+float radiusDog = 2.0f;  
+float radiusBall = 2.0f;
+float ballBaseY = 0.35f;
+float dogBaseY = 0.00f;
+float ballYOffset = 0.0f;
+float dogYOffset = 0.0f;
+// Rebote
+bool  inBounce = false;
+float bounceT = 0.0f;
+float bounceDuration = 0.35f;
+float ballAmp = 0.25f;
+float dogAmp = 0.35f; 
+//Detección de encuentro
+float triggerEps = 0.15f; //umbral de distancia para disparar
+float cooldown = 0.25f;
+float cooldownTimer = 0.0f;
 
 // Deltatime
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
@@ -131,7 +149,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, u8"Previo 10 - Franco Ruiz - Animacion basica", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, u8"Práctica 10 - Franco Ruiz - Animación básica", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -297,6 +315,9 @@ int main()
 		Piso.Draw(lightingShader);
 
 		model = glm::mat4(1);
+		model = glm::rotate(model, glm::radians(-orbitAngle), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(radiusDog, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, dogBaseY + dogYOffset, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 0);
 		Dog.Draw(lightingShader);
@@ -304,9 +325,12 @@ int main()
 		model = glm::mat4(1);
 		glEnable(GL_BLEND);//Activa la funcionalidad para trabajar el canal alfa
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		model = glm::rotate(model, glm::radians(orbitAngle), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(radiusBall, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, ballBaseY + ballYOffset, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 1);
-		model = glm::translate(model, glm::vec3(0.06f, 0.5f, -0.3f));
+		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 		//model = glm::rotate(model, glm::radians(rotBall), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::translate(model, glm::vec3(0.0f, posBall, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -446,17 +470,62 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 		}
 		else
 		{
-			Light1 = glm::vec3(0);//Cuado es solo un valor en los 3 vectores pueden dejar solo una componente
+			Light1 = glm::vec3(0);
 		}
 	}
 	if (keys[GLFW_KEY_N])
 	{
 		AnimBall = !AnimBall;
-		
+
 	}
 }
 void Animation() {
 	if (AnimBall) {
+		orbitAngle += orbitSpeed * deltaTime;
+		if (orbitAngle >= 360.0f) orbitAngle -= 360.0f;
+	}
+
+	const float ballA = glm::radians(orbitAngle);
+	const float dogA = glm::radians(-orbitAngle);
+
+	const float bx = radiusBall * cosf(ballA);
+	const float bz = radiusBall * sinf(ballA);
+	const float dx = radiusDog * cosf(dogA);
+	const float dz = radiusDog * sinf(dogA);
+
+	const float dist = sqrtf((bx - dx) * (bx - dx) + (bz - dz) * (bz - dz));
+
+	if (cooldownTimer > 0.0f) cooldownTimer -= deltaTime;
+
+	//Rebote cuando estén cerca
+	if (!inBounce && cooldownTimer <= 0.0f && dist < triggerEps) {
+		inBounce = true;
+		bounceT = 0.0f;
+	}
+
+	//Animación de rebote
+	if (inBounce) {
+		bounceT += deltaTime;
+		float phase = bounceT / bounceDuration;
+
+		if (phase >= 1.0f) {
+			inBounce = false;
+			cooldownTimer = cooldown;
+			ballYOffset = 0.0f;
+			dogYOffset = 0.0f;
+		}
+		else {
+			float s = sinf(phase * 3.14159265f);
+			ballYOffset = -ballAmp * s;
+			dogYOffset = dogAmp * s;
+		}
+	}
+	else {
+		ballYOffset = 0.0f;
+		dogYOffset = 0.0f;
+	}
+
+	/*if (AnimBall) {
 		if (translateBall) {
 			posBall += 0.003f;
 			if (posBall >= limSupBall) {
@@ -470,7 +539,7 @@ void Animation() {
 			}
 
 		}
-	}
+	}*/
 	/*
 	if (AnimBall)
 	{

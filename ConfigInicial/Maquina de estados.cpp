@@ -498,13 +498,19 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 		}
 		else
 		{
-			Light1 = glm::vec3(0);//Cuado es solo un valor en los 3 vectores pueden dejar solo una componente
+			Light1 = glm::vec3(0);
 		}
 	}
 	if (keys[GLFW_KEY_N])
 	{
 		AnimBall = !AnimBall;
 		
+	}
+
+	if (keys[GLFW_KEY_B]) {
+
+		dogAnim = 1;
+
 	}
 	
 }
@@ -521,7 +527,33 @@ void Animation() {
 		//printf("%f", rotBall);
 	}
 	
-	
+	if (dogAnim == 1) {      //Walk Animation
+
+		if (!step) {          //State 1
+			RLegs += 0.3f;
+			FLegs += 0.3f;
+			head += 0.3f;
+			tail += 0.3f;
+
+			if (RLegs > 15.0f)    //Condition
+				step = true;
+		}
+		else {
+
+			RLegs -= 0.3f;
+			FLegs -= 0.3f;
+			head -= 0.3f;
+			tail -= 0.3f;
+
+			if (RLegs < -15.0f)    //Condition
+				step = false;
+
+		}
+
+		if (dogPos.z < 2.25f) {
+			dogPos.z += 0.0007;
+		}
+	}
 }
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)
